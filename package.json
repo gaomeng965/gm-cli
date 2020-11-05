@@ -1,6 +1,6 @@
 {
   "name": "@mengole/gm-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "脚手架cli",
   "main": "index.js",
   "scripts": {
