@@ -1,21 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-10-30 09:48:50
- * @LastEditTime: 2020-11-02 15:39:51
+ * @LastEditTime: 2020-11-05 15:45:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /gm-cli/src/index.js
  */
-// colors console.log 文本添加字体颜色, 美观
 require('colors');
-
-// 接收命令行参数, 提供基础信息提示功能
 const commander = require('commander');
-
-// 内部模块
-// import { existsSync } from 'fs';
-// import { resolve } from 'path';
-// import { version } from '../package.json';
 const { existsSync } = require('fs');
 const { resolve } = require('path');
 const { version } = require('../package.json');
@@ -32,7 +24,7 @@ if (existsSync(resolve(__dirname, `command/${todo}.js`))) {
 } else {
   console.log(
     `
-      你输入了未知指令, 小哥哥我已经受不了挂了...
+      你输入了未知指令...
     `.red,
   );
   process.exit(-1);
