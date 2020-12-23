@@ -37,6 +37,7 @@ class Download {
     let getTagListLoad;
     let downLoadLoad;
     let repos;
+    let versions;
     let version;
 
     // 获取所在项目组的所有可开发项目列表
@@ -69,13 +70,27 @@ class Download {
     // 获取项目的版本, 这里默认选择确定项目的最近一个版本
     try {
       getTagListLoad = this.getTagList.start();
-      [{ name: version }] = await this.git.getProjectVersions(repo);
+      versions = await this.git.getProjectVersions(repo);
+      // [{ name: version }]
+      version = versions[0].name;
       getTagListLoad.succeed('获取项目版本成功');
     } catch (error) {
       console.log(error);
       getTagListLoad.fail('获取项目版本失败...');
       process.exit(-1);
     }
+
+    // 选择项目版本
+    const versionQuestions = [
+      {
+        type: 'list',
+        name: 'name',
+        message: '请选择你想要的项目版本',
+        choices: versions,
+      },
+    ];
+    const vesionList = await this.inquirer.prompt(versionQuestions);
+    // console.log('vesionList', vesionList);
 
     // 向用户咨询欲创建项目的目录
     const repoName = [
@@ -93,7 +108,6 @@ class Download {
       },
     ];
     const { repoPath } = await this.inquirer.prompt(repoName);
-
     // 下载代码到指定的目录下
     try {
       downLoadLoad = this.downLoad.start();
