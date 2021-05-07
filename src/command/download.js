@@ -113,6 +113,22 @@ class Download {
       downLoadLoad = this.downLoad.start();
       await this.git.downloadProject({ repo, version, repoPath });
       downLoadLoad.succeed('下载代码成功');
+      var shell = require('shelljs');
+
+      if (!shell.which('git')) {
+        shell.echo('Sorry, this script requires git');
+        shell.exit(1);
+      };
+      shell.cd(repoPath);
+      if (shell.exec('npm install').code !== 0) {
+        shell.echo('Error: npm install failed');
+        shell.exit(1);
+      };
+      if (shell.exec('npm run start').code !== 0) {
+        shell.echo('Error: npm run start failed');
+        shell.exit(1);
+      }
+
     } catch (error) {
       console.log(error);
       downLoadLoad.fail('下载代码失败...');

@@ -26,7 +26,8 @@
     "commander": "^2.19.0",
     "download-git-repo": "^1.1.0",
     "inquirer": "^6.2.0",
-    "ora": "^3.0.0"
+    "ora": "^3.0.0",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "eslint": "^7.12.1",
