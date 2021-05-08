@@ -128,7 +128,7 @@ class Download {
         shell.echo('Error: npm run start failed');
         shell.exit(1);
       }
-
+      shell.exec('open http://localhost:8000/');
     } catch (error) {
       console.log(error);
       downLoadLoad.fail('下载代码失败...');
